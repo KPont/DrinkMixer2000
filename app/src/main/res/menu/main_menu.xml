@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/regRecv"
+        android:title="Register Receiver"
+        android:onClick="onClickMenuRegister"/>
+    <item
+        android:id="@+id/unRegRecv"
+        android:title="Unregister Receiver"
+        android:onClick="onClickMenuUnregister"/>
+    <item
+        android:id="@+id/discDevcs"
+        android:title="Discover Devices"
+        android:onClick="onClickMenuDiscover"/>
+    <item
+        android:id="@+id/connect"
+        android:title="Connect"
+        android:onClick="onClickMenuConnect"/>
+</menu>
