@@ -154,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
 
     public void beginThread(){
         serverThread = new Thread(new ServerThread());
+        updateConversationHandler = new Handler();
         this.serverThread.start();
     }
 
