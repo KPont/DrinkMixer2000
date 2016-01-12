@@ -9,6 +9,14 @@ import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.os.Handler;
+import android.widget.TextView;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  * Created by Kasper on 11-01-2016.
@@ -25,6 +33,8 @@ public class WiFiDirectReceiver extends BroadcastReceiver implements WifiP2pMana
     WifiP2pDevice[] _wfdDevices;
     private IntentFilter _intentFilter = null;
     public WiFiDirectReceiver(){}
+
+
 
     public WiFiDirectReceiver(WifiP2pManager wfdManager, WifiP2pManager.Channel wfdChannel, MainActivity appMainActivity){
         super();
@@ -103,9 +113,12 @@ public class WiFiDirectReceiver extends BroadcastReceiver implements WifiP2pMana
         if(wifiP2pInfo.groupFormed){
             if(wifiP2pInfo.isGroupOwner){
                 // Open server socket
+                _appMainActivity.beginThread();
             }
             else{
                // Open a socket to wifiP2pInfo.groupOwnerAddress;
+                _appMainActivity.setServerIP(wifiP2pInfo.groupOwnerAddress.getHostAddress());
+                _appMainActivity.beginClient();
             }
         }
 
@@ -122,4 +135,5 @@ public class WiFiDirectReceiver extends BroadcastReceiver implements WifiP2pMana
         }
 
     }
+
 }
