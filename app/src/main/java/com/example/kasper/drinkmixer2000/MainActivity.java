@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
 
         @Override
         public void run() {
-            Socket socket = null;
+            Socket socketServ = null;
             try{
                 serverSocket = new ServerSocket(serverPort);
             } catch (IOException e) {
@@ -181,8 +181,8 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
             }
             while(!Thread.currentThread().isInterrupted()){
                 try{
-                    socket = serverSocket.accept();
-                    CommunicationThread commThread = new CommunicationThread(socket);
+                    socketServ = serverSocket.accept();
+                    CommunicationThread commThread = new CommunicationThread(socketServ);
                     new Thread(commThread).start();
                 } catch (IOException e) {
                     e.printStackTrace();
