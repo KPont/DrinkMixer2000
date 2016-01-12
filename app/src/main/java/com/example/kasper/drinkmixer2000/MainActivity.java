@@ -1,16 +1,21 @@
 package com.example.kasper.drinkmixer2000;
 
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.wifi.WpsInfo;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,14 +32,31 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 
-public class MainActivity extends AppCompatActivity implements WifiP2pManager.ChannelListener{
+public class MainActivity extends AppCompatActivity implements WifiP2pManager.ChannelListener, SensorEventListener{
 
     private WifiP2pManager _wfdManager;
     private WifiP2pManager.Channel _wfdChannel;
 
+    private Sensor accelerometer;
+    private SensorManager sManager;
+
+    private TextView tv;
+    private TextView text;
+    private TextView ingredient;
+    private TextView data;
+
+    private boolean juicePressed = false;
+    private boolean vodkaPressed = false;
+    private boolean colaPressed = false;
+    private boolean pouring = false;
+
+    private Button juiceButton;
+    private Button vodkaButton;
+    private Button colaButton;
+
     private WiFiDirectReceiver _wfdReceiver;
 
-    private TextView text;
+
 
     ServerSocket serverSocket;
 
@@ -50,15 +72,28 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
     public void setServerIP(String IP){
         this.serverIP = IP;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        juiceButton = (Button) findViewById(R.id.btnJuice);
+        vodkaButton = (Button) findViewById(R.id.btnVodka);
+        colaButton = (Button) findViewById(R.id.btnCola);
+        juiceButton.setVisibility(View.GONE);
+        vodkaButton.setVisibility(View.GONE);
+        colaButton.setVisibility(View.GONE);
+
+        ingredient = (TextView) findViewById(R.id.ingChoosen);
         text = (TextView) findViewById(R.id.text2);
+        tv = (TextView)findViewById(R.id.tv);
+        data = (TextView)findViewById(R.id.Datatext);
 
         _wfdManager = (WifiP2pManager)getSystemService(WIFI_P2P_SERVICE);
         _wfdChannel = _wfdManager.initialize(this, getMainLooper(), this);
+
+        sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
     }
 
     @Override
@@ -275,6 +310,84 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
             }
 
         }
+    }
+    public void onClickSensor(View v){
+
+
+        data.setText("Pouring mode ON");
+
+        juiceButton.setVisibility(View.VISIBLE);
+        vodkaButton.setVisibility(View.VISIBLE);
+        colaButton.setVisibility(View.VISIBLE);
+
+        sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        accelerometer = sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+        Float x = event.values[0];
+        Float y = event.values[1];
+        Float z = event.values[2];
+
+        tv.setText("X: " + x +
+                "\nY: " + y +
+                "\nZ: " + z);
+
+        if (x < 1 && x > -1 && y < 1 && y > -1 && z > 9){
+            sManager.unregisterListener(this);
+
+            juiceButton.setVisibility(View.GONE);
+            vodkaButton.setVisibility(View.GONE);
+            colaButton.setVisibility(View.GONE);
+            ingredient.setText("");
+
+            data.setText("Pouring mode OFF");
+        }
+        if (x > 7 && y < 7 && z < 3 && z > -3 && !pouring && juicePressed){
+            pouring = true;
+            data.setText("Pouring Juice...");
+
+        }
+        if (x > 7 && y < 7 && z < 3 && z > -3 && !pouring && vodkaPressed){
+            pouring = true;
+            data.setText("Pouring Vodka...");
+        }
+        if (x > 7 && y < 7 && z < 3 && z > -3 && !pouring && colaPressed){
+            pouring = true;
+            data.setText("Pouring Cola...");
+        }
+        if (x < 5 && y > 9 && z < 3 && z > -3 && pouring){
+            pouring = false;
+            data.setText("Stopped pouring");
+        }
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    public void onClickJuice(View v){
+        ingredient.setText("Choosen: Juice");
+        vodkaPressed = false;
+        colaPressed = false;
+        juicePressed = true;
+    }
+    public void onClickVodka(View v){
+        ingredient.setText("Choosen: Vodka");
+        juicePressed = false;
+        colaPressed = false;
+        vodkaPressed = true;
+    }
+    public void onClickCola(View v){
+        ingredient.setText("Choosen: Cola");
+        juicePressed = false;
+        vodkaPressed = false;
+        colaPressed = true;
     }
 
 }
