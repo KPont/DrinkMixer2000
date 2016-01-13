@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
     private Button juiceButton;
     private Button vodkaButton;
     private Button colaButton;
+    private String read;
 
     private WiFiDirectReceiver _wfdReceiver;
 
@@ -242,8 +243,21 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         @Override
         public void run() {
             while(!Thread.currentThread().isInterrupted()){
+
+
                 try{
-                    String read = input.readLine();
+                    if(pouring && juicePressed){
+                        read = "1";
+                    }
+                    else if(pouring && vodkaPressed){
+                        read = "2";
+                    }
+                    else if(pouring && colaPressed){
+                        read = "3";
+                    }
+                    else{
+                        read = input.readLine();
+                    }
 
                     updateConversationHandler.post(new updateUIThread(read));
                 } catch (IOException e) {
