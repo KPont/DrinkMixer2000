@@ -247,18 +247,8 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
 
 
                 try{
-                    if(pouring && juicePressed){
-                        read = "1";
-                    }
-                    else if(pouring && vodkaPressed){
-                        read = "2";
-                    }
-                    else if(pouring && colaPressed){
-                        read = "3";
-                    }
-                    else{
                         read = input.readLine();
-                    }
+
 
                     updateConversationHandler.post(new updateUIThread(read));
                 } catch (IOException e) {
@@ -278,19 +268,7 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
 
             String str = et.getText().toString();
 
-            PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),
-
-            true);
-
-            out.println(str);
-
-        } catch (UnknownHostException e) {
-
-            e.printStackTrace();
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
+            sendData(str);
 
         } catch (Exception e) {
 
@@ -298,6 +276,16 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
 
         }
 
+    }
+    public void sendData(String dataToSend){
+        PrintWriter out = null;
+        try {
+            out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        out.println(dataToSend);
     }
     class ClientThread implements Runnable{
 
@@ -364,19 +352,22 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         if (x > 7 && y < 7 && z < 3 && z > -3 && !pouring && juicePressed){
             pouring = true;
             data.setText("Pouring Juice...");
-
+            sendData("3");
         }
         if (x > 7 && y < 7 && z < 3 && z > -3 && !pouring && vodkaPressed){
             pouring = true;
             data.setText("Pouring Vodka...");
+            sendData("1");
         }
         if (x > 7 && y < 7 && z < 3 && z > -3 && !pouring && colaPressed){
             pouring = true;
             data.setText("Pouring Cola...");
+            sendData("2");
         }
         if (x < 5 && y > 9 && z < 3 && z > -3 && pouring){
             pouring = false;
             data.setText("Stopped pouring");
+
         }
 
     }
