@@ -116,6 +116,8 @@ public class WiFiDirectReceiver extends BroadcastReceiver implements WifiP2pMana
             if(wifiP2pInfo.isGroupOwner){
                 // Open server socket
                 _appMainActivity.beginThread();
+                _appMainActivity.findViewById(R.id.text2).setVisibility(View.VISIBLE);
+
 
             }
 
