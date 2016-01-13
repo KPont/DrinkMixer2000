@@ -34,41 +34,42 @@
         android:onClick="onClickSensor"
         android:text="Pour"
         android:visibility="gone"
-        android:layout_alignTop="@+id/btnMix"
+        android:layout_below="@+id/text2"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="43dp" />
 
     <Button
         android:id="@+id/btnJuice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Juice"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/text2"
-        android:layout_toEndOf="@+id/text2"
         android:onClick="onClickJuice"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/btnVodka"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Vodka"
-        android:layout_alignTop="@+id/btnJuice"
-        android:layout_centerHorizontal="true"
         android:onClick="onClickVodka"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/btnCola"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cola"
-        android:layout_alignTop="@+id/btnVodka"
         android:onClick="onClickCola"
         android:visibility="gone"
-        android:layout_alignLeft="@+id/btnGyro"
-        android:layout_alignStart="@+id/btnGyro" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -96,7 +97,7 @@
         android:id="@+id/btnMix"
         android:onClick="onClickMix"
         android:visibility="gone"
-        android:layout_below="@+id/text2"
+        android:layout_alignTop="@+id/btnGyro"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -108,7 +109,7 @@
         android:id="@+id/editTextCL"
         android:hint="Centilitres"
         android:visibility="gone"
-        android:layout_above="@+id/ingChoosen"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -118,30 +119,31 @@
         android:id="@+id/btnAddCl"
         android:onClick="onClickAddCl"
         android:visibility="gone"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignTop="@+id/editTextCL"
+        android:layout_toLeftOf="@+id/editTextCL"
+        android:layout_toStartOf="@+id/editTextCL" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewClJuice"
         android:layout_above="@+id/btnJuice"
-        android:layout_alignLeft="@+id/btnAddCl"
-        android:layout_alignStart="@+id/btnAddCl" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewClVodka"
         android:layout_above="@+id/btnVodka"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignLeft="@+id/btnVodka"
+        android:layout_alignStart="@+id/btnVodka" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewClCola"
-        android:layout_above="@+id/btnCola"
+        android:layout_alignTop="@+id/textViewClVodka"
         android:layout_alignLeft="@+id/btnCola"
         android:layout_alignStart="@+id/btnCola" />
 
