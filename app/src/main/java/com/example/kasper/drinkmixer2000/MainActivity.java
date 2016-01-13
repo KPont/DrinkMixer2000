@@ -280,22 +280,7 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         new Thread(new ClientThread()).start();
 
     }
-    public void onClick(View view) {
-
-        try {
-            EditText et = (EditText) findViewById(R.id.EditText01);
-
-            String str = et.getText().toString();
-
-            sendData(str);
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-        }
-
-    }
+    
     public void sendData(String dataToSend){
         PrintWriter out = null;
         try {
