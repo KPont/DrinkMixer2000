@@ -383,17 +383,17 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         if (x > 7 && y < 7 && z < 3 && z > -3 && !pouring && juicePressed){
             pouring = true;
             data.setText("Pouring Juice...");
-            sendData("3");
+            sendData("1");
         }
         if (x > 7 && y < 7 && z < 3 && z > -3 && !pouring && vodkaPressed){
             pouring = true;
             data.setText("Pouring Vodka...");
-            sendData("1");
+            sendData("2");
         }
         if (x > 7 && y < 7 && z < 3 && z > -3 && !pouring && colaPressed){
             pouring = true;
             data.setText("Pouring Cola...");
-            sendData("2");
+            sendData("3");
         }
         if (x < 5 && y > 9 && z < 3 && z > -3 && pouring){
             pouring = false;
