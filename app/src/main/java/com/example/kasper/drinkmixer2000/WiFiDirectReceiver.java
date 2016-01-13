@@ -117,6 +117,7 @@ public class WiFiDirectReceiver extends BroadcastReceiver implements WifiP2pMana
                 // Open server socket
                 _appMainActivity.beginThread();
                 _appMainActivity.findViewById(R.id.text2).setVisibility(View.VISIBLE);
+                _appMainActivity.findViewById(R.id.Incoming).setVisibility(View.VISIBLE);
 
 
             }
@@ -131,7 +132,6 @@ public class WiFiDirectReceiver extends BroadcastReceiver implements WifiP2pMana
                 _appMainActivity.findViewById(R.id.btnGyro).setVisibility(View.VISIBLE);
                 _appMainActivity.findViewById(R.id.Datatext).setVisibility(View.VISIBLE);
                 _appMainActivity.findViewById(R.id.text2).setVisibility(View.VISIBLE);
-                _appMainActivity.findViewById(R.id.Datatext).setVisibility(View.VISIBLE);
             }
         }
 
