@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.NetworkInfo;
+import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pInfo;
@@ -115,17 +116,20 @@ public class WiFiDirectReceiver extends BroadcastReceiver implements WifiP2pMana
             if(wifiP2pInfo.isGroupOwner){
                 // Open server socket
                 _appMainActivity.beginThread();
-                _appMainActivity.findViewById(R.id.EditText01).setVisibility(View.GONE);
-                _appMainActivity.findViewById(R.id.btn1).setVisibility(View.GONE);
-                _appMainActivity.findViewById(R.id.tv).setVisibility(View.GONE);
-                _appMainActivity.findViewById(R.id.btnGyro).setVisibility(View.GONE);
-                _appMainActivity.findViewById(R.id.Datatext).setVisibility(View.GONE);
 
             }
+
             else{
                // Open a socket to wifiP2pInfo.groupOwnerAddress;
                 _appMainActivity.setServerIP(wifiP2pInfo.groupOwnerAddress.getHostAddress());
                 _appMainActivity.beginClient();
+                _appMainActivity.findViewById(R.id.EditText01).setVisibility(View.VISIBLE);
+                _appMainActivity.findViewById(R.id.btn1).setVisibility(View.VISIBLE);
+                _appMainActivity.findViewById(R.id.tv).setVisibility(View.VISIBLE);
+                _appMainActivity.findViewById(R.id.btnGyro).setVisibility(View.VISIBLE);
+                _appMainActivity.findViewById(R.id.Datatext).setVisibility(View.VISIBLE);
+                _appMainActivity.findViewById(R.id.text2).setVisibility(View.VISIBLE);
+                _appMainActivity.findViewById(R.id.Datatext).setVisibility(View.VISIBLE);
             }
         }
 

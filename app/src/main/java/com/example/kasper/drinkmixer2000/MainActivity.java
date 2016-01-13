@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
     private String read;
 
     private WiFiDirectReceiver _wfdReceiver;
+    private WifiP2pConfig config;
 
 
 
@@ -79,13 +80,12 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        config = new WifiP2pConfig();
+        config.groupOwnerIntent = 15;
 
         juiceButton = (Button) findViewById(R.id.btnJuice);
         vodkaButton = (Button) findViewById(R.id.btnVodka);
         colaButton = (Button) findViewById(R.id.btnCola);
-        juiceButton.setVisibility(View.GONE);
-        vodkaButton.setVisibility(View.GONE);
-        colaButton.setVisibility(View.GONE);
 
         ingredient = (TextView) findViewById(R.id.ingChoosen);
         text = (TextView) findViewById(R.id.text2);
@@ -119,10 +119,11 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
     }
 
     public void onClickMenuConnect(MenuItem item){
+        config.groupOwnerIntent = 0;
         if(isWfdReceiverRegisteredAndFeatureEnabled()){
             WifiP2pDevice theDevice = _wfdReceiver.getFirstAvailableDevice();
             if(theDevice != null){
-                WifiP2pConfig config = new WifiP2pConfig();
+
                 config.deviceAddress = theDevice.deviceAddress;
                 config.wps.setup = WpsInfo.PBC;
                 _wfdManager.connect(_wfdChannel, config, new ActionListenerHandler(this, "Connection"));
