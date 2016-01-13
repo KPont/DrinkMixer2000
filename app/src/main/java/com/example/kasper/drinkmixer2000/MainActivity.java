@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
     private TextView text;
     private TextView ingredient;
     private TextView data;
+    private TextView jCl;
+    private TextView vCl;
+    private TextView cCl;
+
     private EditText cl;
 
     private boolean juicePressed = false;
@@ -101,6 +105,10 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         tv = (TextView)findViewById(R.id.tv);
         data = (TextView)findViewById(R.id.Datatext);
         cl = (EditText)findViewById(R.id.editTextCL);
+        jCl = (TextView)findViewById(R.id.textViewClJuice);
+        vCl = (TextView)findViewById(R.id.textViewClVodka);
+        cCl = (TextView)findViewById(R.id.textViewClCola);
+
 
         _wfdManager = (WifiP2pManager)getSystemService(WIFI_P2P_SERVICE);
         _wfdChannel = _wfdManager.initialize(this, getMainLooper(), this);
@@ -333,6 +341,8 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         juiceButton.setVisibility(View.VISIBLE);
         vodkaButton.setVisibility(View.VISIBLE);
         colaButton.setVisibility(View.VISIBLE);
+        cl.setVisibility(View.GONE);
+        addBtn.setVisibility(View.GONE);
 
         sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -350,12 +360,20 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         }
         else if (mixing){
             mixing = false;
-            sendData(juice+","+vodka+","+cola);
+            sendData(juice + "," + vodka + "," + cola);
             juiceButton.setVisibility(View.GONE);
             vodkaButton.setVisibility(View.GONE);
             colaButton.setVisibility(View.GONE);
             cl.setVisibility(View.GONE);
             addBtn.setVisibility(View.GONE);
+            ingredient.setText("");
+            juice = "";
+            jCl.setText("");
+            vodka = "";
+            vCl.setText("");
+            cola = "";
+            cCl.setText("");
+
         }
     }
 
@@ -377,6 +395,7 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
             vodkaButton.setVisibility(View.GONE);
             colaButton.setVisibility(View.GONE);
             ingredient.setText("");
+            tv.setText("");
 
             data.setText("Pouring mode OFF");
         }
@@ -432,12 +451,15 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         cl.setText("");
         if (juicePressed){
             juice = centilitres;
+            jCl.setText("Cl: "+juice);
         }
         if (vodkaPressed){
             vodka = centilitres;
+            vCl.setText("Cl: "+vodka);
         }
         if (colaPressed){
             cola = centilitres;
+            cCl.setText("Cl: "+cola);
         }
 
     }

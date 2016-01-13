@@ -15,36 +15,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-        android:layout_below="@+id/Incoming" />
-
-    <EditText
-        android:id="@+id/EditText01"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Text To Send"
-        android:layout_above="@+id/btn1"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone" />
-    <Button
-        android:id="@+id/btn1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClick"
-        android:text="Send"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:visibility="gone" />
+        android:layout_below="@+id/Incoming"
+        android:visibility="visible" />
 
     <TextView
-        android:text="DET KOMMER HER"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv"
-        android:layout_below="@+id/btn1"
-        android:layout_toRightOf="@+id/text2"
-        android:layout_toEndOf="@+id/text2"
-        android:visibility="gone" />
+        android:visibility="visible"
+        android:layout_below="@+id/btnAddCl"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/btnGyro"
@@ -52,10 +33,10 @@
         android:layout_height="wrap_content"
         android:onClick="onClickSensor"
         android:text="Pour"
-        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:layout_alignTop="@+id/btnMix"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:visibility="gone" />
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/btnJuice"
@@ -84,37 +65,40 @@
         android:layout_height="wrap_content"
         android:text="Cola"
         android:layout_alignTop="@+id/btnVodka"
-        android:layout_alignLeft="@+id/btnGyro"
-        android:layout_alignStart="@+id/btnGyro"
         android:onClick="onClickCola"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_alignLeft="@+id/btnGyro"
+        android:layout_alignStart="@+id/btnGyro" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ingChoosen"
-        android:layout_above="@+id/btnJuice"
-        android:layout_centerHorizontal="true" />
+        android:visibility="gone"
+        android:layout_below="@+id/btnAddCl"
+        android:layout_alignLeft="@+id/Datatext"
+        android:layout_alignStart="@+id/Datatext"
+        android:layout_marginTop="83dp" />
 
     <TextView
         android:text="Data Sendt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Datatext"
-        android:layout_below="@+id/tv"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_below="@+id/editTextCL"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Make Drink"
         android:id="@+id/btnMix"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:onClick="onClickMix"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_below="@+id/text2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="100dp"
@@ -124,7 +108,7 @@
         android:id="@+id/editTextCL"
         android:hint="Centilitres"
         android:visibility="gone"
-        android:layout_below="@+id/btnMix"
+        android:layout_above="@+id/ingChoosen"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -132,10 +116,33 @@
         android:layout_height="wrap_content"
         android:text="add"
         android:id="@+id/btnAddCl"
-        android:layout_alignTop="@+id/editTextCL"
-        android:layout_toLeftOf="@+id/editTextCL"
-        android:layout_toStartOf="@+id/editTextCL"
         android:onClick="onClickAddCl"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewClJuice"
+        android:layout_above="@+id/btnJuice"
+        android:layout_alignLeft="@+id/btnAddCl"
+        android:layout_alignStart="@+id/btnAddCl" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewClVodka"
+        android:layout_above="@+id/btnVodka"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewClCola"
+        android:layout_above="@+id/btnCola"
+        android:layout_alignLeft="@+id/btnCola"
+        android:layout_alignStart="@+id/btnCola" />
 
 </RelativeLayout>
