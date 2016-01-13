@@ -106,4 +106,35 @@
         android:layout_marginTop="64dp"
         android:visibility="gone" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make Drink"
+        android:id="@+id/btnMix"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickMix"
+        android:visibility="visible" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editTextCL"
+        android:hint="Centilitres"
+        android:visibility="visible"
+        android:layout_below="@+id/btnMix"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:text="add"
+        android:id="@+id/btnAddCl"
+        android:layout_alignTop="@+id/editTextCL"
+        android:layout_toLeftOf="@+id/editTextCL"
+        android:layout_toStartOf="@+id/editTextCL"
+        android:onClick="onClickAddCl" />
+
 </RelativeLayout>

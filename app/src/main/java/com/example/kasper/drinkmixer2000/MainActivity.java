@@ -34,6 +34,11 @@ import java.net.UnknownHostException;
 
 public class MainActivity extends AppCompatActivity implements WifiP2pManager.ChannelListener, SensorEventListener{
 
+    private String drinkName = "";
+    private String juice = "";
+    private String vodka = "";
+    private String cola = "";
+
     private WifiP2pManager _wfdManager;
     private WifiP2pManager.Channel _wfdChannel;
 
@@ -44,15 +49,18 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
     private TextView text;
     private TextView ingredient;
     private TextView data;
+    private EditText cl;
 
     private boolean juicePressed = false;
     private boolean vodkaPressed = false;
     private boolean colaPressed = false;
     private boolean pouring = false;
+    private boolean mixing = false;
 
     private Button juiceButton;
     private Button vodkaButton;
     private Button colaButton;
+    private Button addBtn;
 
     private String read;
 
@@ -86,11 +94,13 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         juiceButton = (Button) findViewById(R.id.btnJuice);
         vodkaButton = (Button) findViewById(R.id.btnVodka);
         colaButton = (Button) findViewById(R.id.btnCola);
+        addBtn = (Button) findViewById(R.id.btnAddCl);
 
         ingredient = (TextView) findViewById(R.id.ingChoosen);
         text = (TextView) findViewById(R.id.text2);
         tv = (TextView)findViewById(R.id.tv);
         data = (TextView)findViewById(R.id.Datatext);
+        cl = (EditText)findViewById(R.id.editTextCL);
 
         _wfdManager = (WifiP2pManager)getSystemService(WIFI_P2P_SERVICE);
         _wfdChannel = _wfdManager.initialize(this, getMainLooper(), this);
@@ -329,6 +339,26 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         sManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    public void onClickMix(View v) {
+        if (!mixing) {
+            mixing = true;
+            juiceButton.setVisibility(View.VISIBLE);
+            vodkaButton.setVisibility(View.VISIBLE);
+            colaButton.setVisibility(View.VISIBLE);
+            cl.setVisibility(View.VISIBLE);
+            addBtn.setVisibility(View.VISIBLE);
+        }
+        else if (mixing){
+            mixing = false;
+            sendData(juice+","+vodka+","+cola);
+            juiceButton.setVisibility(View.GONE);
+            vodkaButton.setVisibility(View.GONE);
+            colaButton.setVisibility(View.GONE);
+            cl.setVisibility(View.GONE);
+            addBtn.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
 
@@ -397,5 +427,20 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         vodkaPressed = false;
         colaPressed = true;
     }
+    public void onClickAddCl(View v){
+        String centilitres = cl.getText().toString();
+        cl.setText("");
+        if (juicePressed){
+            juice = centilitres;
+        }
+        if (vodkaPressed){
+            vodka = centilitres;
+        }
+        if (colaPressed){
+            cola = centilitres;
+        }
+
+    }
+
 
 }
