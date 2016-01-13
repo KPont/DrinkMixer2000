@@ -5,20 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.NetworkInfo;
-import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
-import android.os.Handler;
 import android.view.View;
-import android.widget.TextView;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 /**
  * Created by Kasper on 11-01-2016.
@@ -132,6 +123,7 @@ public class WiFiDirectReceiver extends BroadcastReceiver implements WifiP2pMana
                 _appMainActivity.findViewById(R.id.btnGyro).setVisibility(View.VISIBLE);
                 _appMainActivity.findViewById(R.id.Datatext).setVisibility(View.VISIBLE);
                 _appMainActivity.findViewById(R.id.text2).setVisibility(View.VISIBLE);
+                _appMainActivity.findViewById(R.id.btnAddCl).setVisibility(View.VISIBLE);
             }
         }
 
