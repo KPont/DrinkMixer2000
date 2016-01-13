@@ -10,6 +10,7 @@ import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Handler;
+import android.view.View;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -114,6 +115,13 @@ public class WiFiDirectReceiver extends BroadcastReceiver implements WifiP2pMana
             if(wifiP2pInfo.isGroupOwner){
                 // Open server socket
                 _appMainActivity.beginThread();
+                _appMainActivity.findViewById(R.id.EditText01).setVisibility(View.GONE);
+                _appMainActivity.findViewById(R.id.text2).setVisibility(View.GONE);
+                _appMainActivity.findViewById(R.id.btn1).setVisibility(View.GONE);
+                _appMainActivity.findViewById(R.id.tv).setVisibility(View.GONE);
+                _appMainActivity.findViewById(R.id.btnGyro).setVisibility(View.GONE);
+                _appMainActivity.findViewById(R.id.Datatext).setVisibility(View.GONE);
+
             }
             else{
                // Open a socket to wifiP2pInfo.groupOwnerAddress;

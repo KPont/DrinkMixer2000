@@ -367,6 +367,7 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         if (x < 5 && y > 9 && z < 3 && z > -3 && pouring){
             pouring = false;
             data.setText("Stopped pouring");
+            sendData("#");
 
         }
 
