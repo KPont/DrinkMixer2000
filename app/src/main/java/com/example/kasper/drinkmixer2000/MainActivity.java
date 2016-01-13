@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         new Thread(new ClientThread()).start();
 
     }
-    
+
     public void sendData(String dataToSend){
         PrintWriter out = null;
         try {
