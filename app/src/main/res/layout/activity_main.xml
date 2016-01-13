@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ingChoosen"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_below="@+id/btnAddCl"
         android:layout_alignLeft="@+id/Datatext"
         android:layout_alignStart="@+id/Datatext"
