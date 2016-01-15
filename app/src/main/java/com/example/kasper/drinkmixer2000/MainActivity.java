@@ -35,9 +35,9 @@ import java.net.UnknownHostException;
 public class MainActivity extends AppCompatActivity implements WifiP2pManager.ChannelListener, SensorEventListener{
 
     private String drinkName = "";
-    private String juice = "";
-    private String vodka = "";
-    private String cola = "";
+    private String juice = "0";
+    private String vodka = "0";
+    private String cola = "0";
 
     private WifiP2pManager _wfdManager;
     private WifiP2pManager.Channel _wfdChannel;
@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
     private boolean colaPressed = false;
     private boolean pouring = false;
     private boolean mixing = false;
+    private boolean pourPressed = false;
 
     private Button juiceButton;
     private Button vodkaButton;
@@ -222,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         }
         @Override
         public void run() {
-            text.setText(text.getText().toString()+"Client Says: " + msg + "\n");
+            text.setText(text.getText().toString()+"Device Says: " + msg + "\n");
         }
     }
 
@@ -318,22 +319,34 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
 
         }
     }
-    public void onClickSensor(View v){
+    public void onClickSensor(View v) {
 
+        if (!pourPressed) {
+            pourPressed = true;
+            data.setText("Pouring mode ON");
 
-        data.setText("Pouring mode ON");
+            juiceButton.setVisibility(View.VISIBLE);
+            vodkaButton.setVisibility(View.VISIBLE);
+            colaButton.setVisibility(View.VISIBLE);
+            cl.setVisibility(View.GONE);
+            addBtn.setVisibility(View.GONE);
 
-        juiceButton.setVisibility(View.VISIBLE);
-        vodkaButton.setVisibility(View.VISIBLE);
-        colaButton.setVisibility(View.VISIBLE);
-        cl.setVisibility(View.GONE);
-        addBtn.setVisibility(View.GONE);
+            sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+            accelerometer = sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            sManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        if (pourPressed){
+            sManager.unregisterListener(this);
 
-        sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        accelerometer = sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+            pourPressed = false;
+            juiceButton.setVisibility(View.GONE);
+            vodkaButton.setVisibility(View.GONE);
+            colaButton.setVisibility(View.GONE);
+            ingredient.setText("");
+            tv.setText("");
+            data.setText("Pouring mode OFF");
+        }
     }
-
     public void onClickMix(View v) {
         if (!mixing) {
             mixing = true;
@@ -352,11 +365,11 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
             cl.setVisibility(View.GONE);
             addBtn.setVisibility(View.GONE);
             ingredient.setText("");
-            juice = "";
+            juice = "0";
             jCl.setText("");
-            vodka = "";
+            vodka = "0";
             vCl.setText("");
-            cola = "";
+            cola = "0";
             cCl.setText("");
 
         }
@@ -376,6 +389,7 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
         if (x < 1 && x > -1 && y < 1 && y > -1 && z > 9){
             sManager.unregisterListener(this);
 
+            pourPressed = false;
             juiceButton.setVisibility(View.GONE);
             vodkaButton.setVisibility(View.GONE);
             colaButton.setVisibility(View.GONE);
@@ -403,9 +417,7 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
             pouring = false;
             data.setText("Stopped pouring");
             sendData("#");
-
         }
-
     }
 
     @Override

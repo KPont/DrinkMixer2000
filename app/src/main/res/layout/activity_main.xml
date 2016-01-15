@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/Datatext"
         android:visibility="gone"
-        android:layout_below="@+id/editTextCL"
+        android:layout_alignTop="@+id/text2"
         android:layout_centerHorizontal="true" />
 
     <Button

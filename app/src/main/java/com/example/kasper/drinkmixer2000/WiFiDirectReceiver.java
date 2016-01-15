@@ -109,8 +109,6 @@ public class WiFiDirectReceiver extends BroadcastReceiver implements WifiP2pMana
                 _appMainActivity.beginThread();
                 _appMainActivity.findViewById(R.id.text2).setVisibility(View.VISIBLE);
                 _appMainActivity.findViewById(R.id.Incoming).setVisibility(View.VISIBLE);
-
-
             }
 
             else{
